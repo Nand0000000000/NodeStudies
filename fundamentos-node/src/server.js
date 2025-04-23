@@ -2,8 +2,22 @@ import http from 'node:http';
 
 const users =[];
 
-const server = http.createServer ((req, res)=>{
+const server = http.createServer (async(req, res)=>{
     const {method, url} = req;
+
+    const buffers = [];
+
+    for await (const chunk of req){
+        buffers.push(chunk)
+    }
+
+    try{
+        req.body = JSON.parse(Buffer.concat(buffers).toString())
+    }catch{
+        req.body = null
+    }
+
+    console.log(req.body)
 
     if (method === 'POST' && url === '/users'){
         users.push({
