@@ -22,7 +22,7 @@ const server = http.createServer (async(req, res)=>{
     if (method === 'POST' && url === '/users'){
         users.push({
             name: "Fernando",
-            email: "flgm0504@gmail.com",
+            email: "test@gmail.com",
         })
         return res.end("Usuario criado");
     }
